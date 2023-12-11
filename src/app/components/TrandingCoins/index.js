@@ -4,11 +4,21 @@ import axios from 'axios'
 import Image from 'next/image'
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+// import required modules
+import { EffectCoverflow, Autoplay } from 'swiper/modules';
 
 const TrandingCoinsWrapper = dynamic(() => import('./TrandingCoins.Styled'), { ssr: false })
+
 const TrandingCoins = () => {
+    // state for TrandingCoins list
     const [list, setList] = useState([])
 
+    // API call for TrandingCoins from CoinGecko Platform start
     const fetchTrandingCoins = useCallback(async () => {
         try {
             const res = await axios.get('https://api.coingecko.com/api/v3/search/trending')
@@ -31,16 +41,40 @@ const TrandingCoins = () => {
     useEffect(() => {
         fetchTrandingCoins()
     }, [])
+    // API call for TrandingCoins from CoinGecko Platform end
 
     return (
         <TrandingCoinsWrapper>
-            {list?.map((e) =>
-
-                <div>
-                    <Image src={e?.item.large} width={120} height={120} placeholder='blur' blurDataURL={e?.item.large} alt='tranding_coin_img' />
-                    <Typography.Text className='coin_name'>name</Typography.Text>
-                </div>
-            )}
+            <Typography.Text className='tranding_text'>Today's Tranding Coins</Typography.Text>
+            <Swiper
+                slidesPerView={3}
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: true,
+                }}
+                spaceBetween={30}
+                freeMode={true}
+                modules={[EffectCoverflow, Autoplay]}
+                coverflowEffect={{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                }}
+                loop
+                className="mySwiper"
+            >
+                {list?.map((e) =>
+                    <SwiperSlide>
+                        <Image src={e?.item.large} width={120} height={120} placeholder='blur' blurDataURL={e?.item.large} alt='tranding_coin_img' />
+                        <Typography.Text className='coin_name'>{e?.item?.name}</Typography.Text>
+                    </SwiperSlide>
+                )}
+            </Swiper>
         </TrandingCoinsWrapper>
     )
 }

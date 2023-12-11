@@ -13,10 +13,10 @@
     "@emotion/styled": "^11.11.0",
     "antd": "^5.12.1",
     "axios": "^1.6.2",
-    "keen-slider": "^6.8.6",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "eslint": "^8",
