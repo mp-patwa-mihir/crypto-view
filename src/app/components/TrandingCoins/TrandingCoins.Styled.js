@@ -3,11 +3,16 @@ import styled from "@emotion/styled";
 
 const TrandingCoinsWrapper = styled.div(() => ({
     padding: '24px',
+    width: '100%',
     '& .tranding_text': {
         fontSize: '38px',
         color: theme.title,
         fontWeight: 500,
         textAlign: 'center',
+        '@media (max-width:576px)': {
+            fontSize: '28px',
+            fontWeight: 400,
+        },
     },
     '& .mySwiper': {
         border: `1px solid ${theme.border}`,
