@@ -11,12 +11,15 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 // import required modules
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
+import useWindowSize from '../../../Helpers/Hooks/useWindowSize'
 
 const TrandingCoinsWrapper = dynamic(() => import('./TrandingCoins.Styled'), { ssr: false })
 
 const TrandingCoins = () => {
     // state for TrandingCoins list
     const [list, setList] = useState([])
+    // for window size
+    const wWidth = useWindowSize().width
 
     // API call for TrandingCoins from CoinGecko Platform start
     const fetchTrandingCoins = useCallback(async () => {
@@ -47,13 +50,14 @@ const TrandingCoins = () => {
         <TrandingCoinsWrapper>
             <Typography.Text className='tranding_text'>Today's Tranding Coins</Typography.Text>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={wWidth > 576 ? 3 : 1}
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
                 autoplay={{
                     delay: 2000,
                     disableOnInteraction: true,
+                    pauseOnMouseEnter: true,
                 }}
                 spaceBetween={30}
                 freeMode={true}

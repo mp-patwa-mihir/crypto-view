@@ -12,22 +12,11 @@ const HeaderWrapper = dynamic(() => import('./Header.Styled'), {
 const Header = () => {
     const { Text } = Typography;
     const router = useRouter()
-    const [currency, setCurrency] = useState('inr')
     return (
         <HeaderWrapper>
             <Row className='header_main_row'>
                 <Col xs={24} className='header_main_col'>
                     <Text className='app_name' onClick={() => router?.push('/')}>Crypto View</Text>
-                    <Select
-                        className='currancy_select'
-                        defaultValue="inr"
-                        value={currency}
-                        options={[
-                            { value: 'inr', label: 'INR' },
-                            { value: 'usd', label: 'USD' },
-                        ]}
-                        onChange={(e) => setCurrency(e)}
-                    />
                 </Col>
             </Row>
         </HeaderWrapper>

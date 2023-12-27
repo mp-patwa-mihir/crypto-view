@@ -19,18 +19,6 @@ const HeaderWrapper = styled.div(() => ({
                     transition: 'all 0.3s'
                 },
             },
-            '& .currancy_select': {
-                minWidth: '80px',
-                '& .ant-select-selector': {
-                    backgroundColor: 'transparent',
-                    borderColor: theme.border,
-                    borderWidth: '2px solid',
-                    color: theme.text,
-                },
-                '& .ant-select-arrow': {
-                    color: theme.text,
-                },
-            },
         },
     },
 }))
